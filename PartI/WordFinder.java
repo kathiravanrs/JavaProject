@@ -23,15 +23,22 @@ public class WordFinder extends JFrame {
             BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
 
     Font font = new Font("Segoe Script", Font.BOLD, 20);
+    Color green = new Color(0, 255, 0, 100);
+    Color yellow = new Color(255, 255, 0, 100);
+    Color black = new Color(0, 0, 0, 100);
+
+    String randomWord = "raise";
+
 
     private JPanel wordPanel;
     ArrayList<JTextArea> letters = new ArrayList<>();
     ArrayList<ArrayList<JTextArea>> words = new ArrayList<>();
+    ArrayList<ArrayList<Color>> colors = new ArrayList<>();
 
 
     public WordFinder() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 800);
+        this.setSize(400, 600);
         jFileChooser = new JFileChooser(".");
         wordList = new WordList();
         topPanel = new JPanel();
@@ -41,14 +48,26 @@ public class WordFinder extends JFrame {
 
         key = new JTextField(10);
         key.addActionListener(e -> {
-            guesses.set(tries, key.getText());
+            String input = key.getText().toUpperCase();
+            guesses.set(tries, input);
+            for (int i = 0; i < 5; i++) {
+                if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
+                    colors.get(tries).set(i, green);
+                } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
+                    colors.get(tries).set(i, yellow);
+                } else colors.get(tries).set(i, black);
+
+            }
+
             tries++;
+            updateGrid();
+            repaint();
 //            find();
         });
 
 
         for (int i = 0; i < 6; i++) {
-            guesses.add("ABCDE");
+            guesses.add("     ");
         }
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(e -> {
@@ -65,7 +84,7 @@ public class WordFinder extends JFrame {
 //        JScrollPane scrollPane = new JScrollPane(wordsBox);
 //        wordsBox.setText("Open A File to Search");
 //
-//        this.add(topPanel, BorderLayout.NORTH);
+        this.add(topPanel, BorderLayout.NORTH);
 //        this.add(scrollPane);
     }
 
@@ -117,7 +136,6 @@ public class WordFinder extends JFrame {
                     InputStream in = new FileInputStream(jFileChooser.getSelectedFile().getAbsolutePath());
                     wordList.load(in);
                     fileOpened = true;
-
                     find();
                 } catch (IOException error) {
                     error.printStackTrace();
@@ -126,23 +144,31 @@ public class WordFinder extends JFrame {
         }
     }
 
-    public void createGrid() {
+    public void createGrid()
+    {
         for (int i = 0; i < 6; i++) {
             ArrayList<JTextArea> a = new ArrayList<>();
+            ArrayList<Color> c = new ArrayList<>();
+
             for (int j = 0; j < 5; j++) {
-                JTextArea area = new JTextArea(2,2);
+                JTextArea area = new JTextArea(1, 1);
+                area.setAlignmentX(Component.CENTER_ALIGNMENT);
                 area.setBorder(blackBorder);
+//                area.setBackground(green);
                 a.add(area);
+                c.add(black);
             }
             words.add(a);
+            colors.add(c);
         }
     }
 
-    public void updateGrid(){
-        for(int i = 0; i<6;i++){
-            for(int j=0;j<5;j++){
+    public void updateGrid() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 5; j++) {
                 words.get(i).get(j).setText(String.valueOf(guesses.get(i).charAt(j)));
                 words.get(i).get(j).setFont(font);
+                words.get(i).get(j).setBackground(colors.get(i).get(j));
             }
         }
     }
@@ -158,6 +184,7 @@ public class WordFinder extends JFrame {
             wordsPanel.add(lettersPanel);
         }
         this.add(wordsPanel);
+        this.repaint();
     }
 
 
