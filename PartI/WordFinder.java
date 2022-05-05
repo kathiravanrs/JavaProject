@@ -154,7 +154,6 @@ public class WordFinder extends JFrame {
                 JTextArea area = new JTextArea(1, 1);
                 area.setAlignmentX(Component.CENTER_ALIGNMENT);
                 area.setBorder(blackBorder);
-//                area.setBackground(green);
                 a.add(area);
                 c.add(black);
             }
