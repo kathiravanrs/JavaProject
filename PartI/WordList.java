@@ -10,15 +10,15 @@ public class WordList {
 
     }
 
-    public Object getWords() {
+    public Object getRandomWord() {
         int r = (int) (Math.random() * words.size());
         return words.get(r);
     }
 
     /**
      * Load a file into this word set.
-     * @effects Removes all the words from this word set and replaces
-     * them with the words found in the given file.
+     * @effects Removes all the wordsTextArea from this word set and replaces
+     * them with the wordsTextArea found in the given file.
      * @param in File to load
      * @throws IOException if file cannot be opened
      */
@@ -48,9 +48,9 @@ public class WordList {
         WordList words = new WordList ();
 
 
-        URL url = WordList.class.getResource("words");
+        URL url = WordList.class.getResource("wordsTextArea");
         if (url == null)
-            throw new RuntimeException("Missing resource: words");
+            throw new RuntimeException("Missing resource: wordsTextArea");
         try {
             words.load(url.openStream());
         } catch (IOException e) {

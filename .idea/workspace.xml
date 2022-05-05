@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="">
+    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="Latest">
+      <change afterPath="$PROJECT_DIR$/common_words" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment7.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/PartI/WordFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/PartI/WordFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PartI/WordList.java" beforeDir="false" afterPath="$PROJECT_DIR$/PartI/WordList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/words" beforeDir="false" afterPath="$PROJECT_DIR$/words" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/words100" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,22 +25,25 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="28c6286K9INUo3LkN8w5rtbLKN2" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="WordFinder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="WordFinder" />
@@ -61,8 +69,24 @@
       <workItem from="1651503318311" duration="3940000" />
       <workItem from="1651592856121" duration="11394000" />
       <workItem from="1651678732371" duration="6746000" />
-      <workItem from="1651715863699" duration="7505000" />
+      <workItem from="1651715863699" duration="16387000" />
+      <workItem from="1651791711920" duration="857000" />
     </task>
+    <task id="LOCAL-00001" summary="May 5">
+      <created>1651770261698</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651770261698</updated>
+    </task>
+    <task id="LOCAL-00002" summary="May 5">
+      <created>1651774740561</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1651774740561</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,5 +102,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="May 5" />
+    <MESSAGE value="Latest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Latest" />
   </component>
 </project>
