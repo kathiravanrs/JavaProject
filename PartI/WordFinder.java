@@ -1,18 +1,19 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class WordFinder extends JFrame {
 
     private int tries = 0;
     private JPanel topPanel;
-    private WordList wordList;
+    private WordList commonWords;
+    private WordList allWords;
     private JTextField key;
     private JTextArea wordsBox;
     private boolean fileOpened = false;
@@ -24,7 +25,7 @@ public class WordFinder extends JFrame {
     Color green = new Color(0, 255, 0, 100);
     Color yellow = new Color(255, 255, 0, 100);
     Color black = new Color(0, 0, 0, 100);
-
+    ArrayList<Object> allWordsList;
     String randomWord = "raise";
     ArrayList<ArrayList<JTextArea>> wordsTextArea = new ArrayList<>();
     ArrayList<ArrayList<Color>> colors = new ArrayList<>();
@@ -33,7 +34,7 @@ public class WordFinder extends JFrame {
     public WordFinder() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(400, 600);
-        wordList = new WordList();
+        commonWords = new WordList();
         topPanel = new JPanel();
         topPanel.setSize(500, 180);
         createMenus();
@@ -41,7 +42,24 @@ public class WordFinder extends JFrame {
         System.out.println(randomWord);
         JLabel textLabel = new JLabel("Enter your guess: ");
         key = new JTextField(10);
-        key.addActionListener(e -> {
+        key.addActionListener(new AddWords());
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(e -> {
+            key.setText("");
+        });
+
+        topPanel.add(textLabel);
+        topPanel.add(key);
+        topPanel.add(clearButton);
+        createGrid();
+        displayGrid();
+        this.add(topPanel, BorderLayout.NORTH);
+    }
+
+    class AddWords implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e)  {
             String input = key.getText().toUpperCase();
             guesses.set(tries, input);
             for (int i = 0; i < 5; i++) {
@@ -50,7 +68,6 @@ public class WordFinder extends JFrame {
                 } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
                     colors.get(tries).set(i, yellow);
                 } else colors.get(tries).set(i, black);
-
             }
 
             tries++;
@@ -68,6 +85,7 @@ public class WordFinder extends JFrame {
                     reset();
                 } else System.exit(0);
             }
+
             if (tries == 6) {
                 int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
                         "Sorry! You didn't guess the word correctly.", //Object message,
@@ -81,18 +99,7 @@ public class WordFinder extends JFrame {
                     reset();
                 } else System.exit(0);
             }
-        });
-        JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(e -> {
-            key.setText("");
-        });
-
-        topPanel.add(textLabel);
-        topPanel.add(key);
-        topPanel.add(clearButton);
-        createGrid();
-        displayGrid();
-        this.add(topPanel, BorderLayout.NORTH);
+        }
     }
 
     private void createMenus() {
@@ -103,25 +110,16 @@ public class WordFinder extends JFrame {
         JMenuItem open = new JMenuItem("Open");
         JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener((e) -> System.exit(0));
-
-        /* OpenActionListener that will open the file chooser */
-//        class OpenActionListener implements ActionListener {
-//            public void actionPerformed(ActionEvent e) {
-//                OpenFileListener myFileListener = new OpenFileListener();
-//                myFileListener.actionPerformed(e);
-//            }
-//        }
-//        open.addActionListener(new OpenActionListener());
         menu.add(open);
         menu.add(exit);
         menuBar.add(menu);
     }
 
-    private void pickRandomWord() {
+    public void pickRandomWord() {
 
         try {
-            InputStream in = new FileInputStream("words");
-            wordList.load(in);
+            InputStream in = new FileInputStream("common_words");
+            commonWords.load(in);
             fileOpened = true;
         } catch (IOException error) {
             error.printStackTrace();
@@ -130,25 +128,23 @@ public class WordFinder extends JFrame {
             System.out.println("File Not Chosen!");
             return;
         }
-        randomWord = (String) wordList.getRandomWord();
+        randomWord = (String) commonWords.getRandomWord();
     }
 
-//    class OpenFileListener implements ActionListener {
-//        public void actionPerformed(ActionEvent e) {
-//            int returnVal = jFileChooser.showOpenDialog(getParent());
-//            if (returnVal == JFileChooser.APPROVE_OPTION) {
-//                try {
-//                    System.out.println("You chose to open this file: " + jFileChooser.getSelectedFile().getAbsolutePath());
-//                    InputStream in = new FileInputStream("words");
-//                    wordList.load(in);
-//                    fileOpened = true;
-//                    pickRandomWord();
-//                } catch (IOException error) {
-//                    error.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    public void loadWords() {
+        try {
+            InputStream in = new FileInputStream("words");
+            allWords.load(in);
+            fileOpened = true;
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+        if (!fileOpened) {
+            System.out.println("File Not Chosen!");
+            return;
+        }
+        allWordsList = (ArrayList<Object>) allWords.getWords();
+    }
 
     public void createGrid() {
         guesses.clear();

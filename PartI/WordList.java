@@ -15,6 +15,10 @@ public class WordList {
         return words.get(r);
     }
 
+    public List<Object> getWords(){
+        return words;
+    }
+
     /**
      * Load a file into this word set.
      * @effects Removes all the wordsTextArea from this word set and replaces
