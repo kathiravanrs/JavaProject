@@ -7,18 +7,18 @@ import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class WordFinder extends JFrame {
 
     private int tries = 0;
-    private JPanel topPanel;
-    private WordList commonWords;
-    private WordList allWords;
-    private JTextField key;
+    private final WordList commonWords;
+    private final WordList allWords;
+    private final JTextField key;
     private JTextArea wordsBox;
     private boolean fileOpened = false;
-    private ArrayList<String> guesses = new ArrayList<>();
-    private CompoundBorder blackBorder = new CompoundBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15),
+    private final ArrayList<String> guesses = new ArrayList<>();
+    private final CompoundBorder blackBorder = new CompoundBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15),
             BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
 
     Font font = new Font("Segoe Script", Font.BOLD, 20);
@@ -35,18 +35,18 @@ public class WordFinder extends JFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(400, 600);
         commonWords = new WordList();
-        topPanel = new JPanel();
+        allWords = new WordList();
+        JPanel topPanel = new JPanel();
         topPanel.setSize(500, 180);
         createMenus();
         pickRandomWord();
+        loadWords();
         System.out.println(randomWord);
         JLabel textLabel = new JLabel("Enter your guess: ");
         key = new JTextField(10);
         key.addActionListener(new AddWords());
         JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(e -> {
-            key.setText("");
-        });
+        clearButton.addActionListener(e -> key.setText(""));
 
         topPanel.add(textLabel);
         topPanel.add(key);
@@ -56,11 +56,22 @@ public class WordFinder extends JFrame {
         this.add(topPanel, BorderLayout.NORTH);
     }
 
-    class AddWords implements ActionListener{
+    class AddWords implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e)  {
-            String input = key.getText().toUpperCase();
+        public void actionPerformed(ActionEvent e) {
+            String input = key.getText().strip().toUpperCase();
+            if (input.length() != 5) {
+                JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
+                return;
+            }
+            if (!allWordsList.contains(input.toLowerCase())) {
+                JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
+                key.setText("");
+                return;
+            }
+
+
             guesses.set(tries, input);
             for (int i = 0; i < 5; i++) {
                 if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
