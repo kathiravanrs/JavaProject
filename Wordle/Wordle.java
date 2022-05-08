@@ -8,11 +8,11 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
 
-public class WordFinder extends JFrame {
+public class Wordle extends JFrame {
 
     private int tries = 0;
-    private final WordList commonWords;
-    private final WordList allWords;
+    private final ReadWordFile commonWords;
+    private final ReadWordFile allWords;
     private final JTextField key;
     private boolean fileOpened = false;
     private final ArrayList<String> guesses = new ArrayList<>();
@@ -30,11 +30,11 @@ public class WordFinder extends JFrame {
     ArrayList<ArrayList<Color>> colors = new ArrayList<>();
 
 
-    public WordFinder() {
+    public Wordle() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(400, 600);
-        commonWords = new WordList();
-        allWords = new WordList();
+        commonWords = new ReadWordFile();
+        allWords = new ReadWordFile();
         JPanel topPanel = new JPanel();
         topPanel.setSize(500, 180);
         createMenus();
@@ -68,7 +68,6 @@ public class WordFinder extends JFrame {
                 key.setText("");
                 return;
             } else {
-
                 guesses.set(tries, input);
                 for (int i = 0; i < 5; i++) {
                     if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
@@ -80,37 +79,47 @@ public class WordFinder extends JFrame {
 
                 tries++;
                 updateGrid();
-                if (input.equals(randomWord.toUpperCase())) {
-                    int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
-                            "Congrats! You guessed the word in " + tries + " tries!", //Object message,
-                            "You Won", //String title
-                            JOptionPane.YES_NO_OPTION, //int optionType
-                            JOptionPane.INFORMATION_MESSAGE, //int messageType
-                            null, //Icon icon,
-                            new String[]{"Play Again", "Exit"}, //Object[] options,
-                            "Exit");//Object initialValue
-                    if (choice == 0) {
-                        reset();
-                    } else System.exit(0);
-                }
+                key.setText("");
+                if (input.equals(randomWord.toUpperCase())) gameWon();
             }
-            if (tries == 6) {
-                int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
-                        "Sorry! You didn't guess the word correctly.", //Object message,
-                        "You Lost", //String title
-                        JOptionPane.YES_NO_OPTION, //int optionType
-                        JOptionPane.INFORMATION_MESSAGE, //int messageType
-                        null, //Icon icon,
-                        new String[]{"Play Again", "Exit"}, //Object[] options,
-                        "Exit");//Object initialValue
-                if (choice == 0) {
-                    reset();
-                } else System.exit(0);
-            }
+            if (tries == 6) gameLost();
         }
     }
 
-    private void createMenus() {
+    public void gameWon() {
+        int choice = JOptionPane.showOptionDialog(null,
+                "Congrats! You guessed the word in " + tries + " tries!",
+                "You Won",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new String[]{"Play Again", "Email My Score"},
+                "Play Again");
+        if (choice == 0) {
+            reset();
+        } else System.exit(0);
+
+    }
+
+    public void gameLost() {
+        int choice = JOptionPane.showOptionDialog(null,
+                "Sorry! You didn't guess the word correctly.",
+                "You Lost",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new String[]{"Play Again", "Exit"},
+                "Exit");
+        if (choice == 0) {
+            reset();
+        } else System.exit(0);
+    }
+
+    public void sendEmail(){
+
+    }
+
+    public void createMenus() {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
         JMenu menu = new JMenu("File");
@@ -201,13 +210,13 @@ public class WordFinder extends JFrame {
 
     public void reset() {
         this.setVisible(false);
-        WordFinder wordFinder = new WordFinder();
+        Wordle wordFinder = new Wordle();
         wordFinder.setVisible(true);
     }
 
 
     public static void main(String[] args) {
-        WordFinder wordFinder = new WordFinder();
+        Wordle wordFinder = new Wordle();
         wordFinder.setVisible(true);
     }
 }

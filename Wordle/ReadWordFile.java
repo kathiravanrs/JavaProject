@@ -3,10 +3,10 @@ import java.net.URL;
 import java.text.Collator;
 import java.util.*;
 
-public class WordList {
+public class ReadWordFile {
     private List words;
 
-    public WordList() {
+    public ReadWordFile() {
 
     }
 
@@ -49,10 +49,10 @@ public class WordList {
      * @param args Command-line arguments.  Ignored.
      */
     public static void main(String[] args) {
-        WordList words = new WordList ();
+        ReadWordFile words = new ReadWordFile();
 
 
-        URL url = WordList.class.getResource("wordsTextArea");
+        URL url = ReadWordFile.class.getResource("wordsTextArea");
         if (url == null)
             throw new RuntimeException("Missing resource: wordsTextArea");
         try {
