@@ -7,7 +7,6 @@ import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class WordFinder extends JFrame {
 
@@ -15,16 +14,16 @@ public class WordFinder extends JFrame {
     private final WordList commonWords;
     private final WordList allWords;
     private final JTextField key;
-    private JTextArea wordsBox;
     private boolean fileOpened = false;
     private final ArrayList<String> guesses = new ArrayList<>();
     private final CompoundBorder blackBorder = new CompoundBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15),
             BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
 
     Font font = new Font("Segoe Script", Font.BOLD, 20);
-    Color green = new Color(0, 255, 0, 100);
-    Color yellow = new Color(255, 255, 0, 100);
-    Color black = new Color(0, 0, 0, 100);
+    Color green = new Color(0, 255, 0);
+    Color yellow = new Color(255, 255, 0);
+    Color black = new Color(100, 100, 100);
+    Color grey = new Color(50, 50, 50);
     ArrayList<Object> allWordsList;
     String randomWord = "raise";
     ArrayList<ArrayList<JTextArea>> wordsTextArea = new ArrayList<>();
@@ -64,39 +63,37 @@ public class WordFinder extends JFrame {
             if (input.length() != 5) {
                 JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
                 return;
-            }
-            if (!allWordsList.contains(input.toLowerCase())) {
+            } else if (!allWordsList.contains(input.toLowerCase())) {
                 JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
                 key.setText("");
                 return;
+            } else {
+
+                guesses.set(tries, input);
+                for (int i = 0; i < 5; i++) {
+                    if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
+                        colors.get(tries).set(i, green);
+                    } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
+                        colors.get(tries).set(i, yellow);
+                    } else colors.get(tries).set(i, black);
+                }
+
+                tries++;
+                updateGrid();
+                if (input.equals(randomWord.toUpperCase())) {
+                    int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
+                            "Congrats! You guessed the word in " + tries + " tries!", //Object message,
+                            "You Won", //String title
+                            JOptionPane.YES_NO_OPTION, //int optionType
+                            JOptionPane.INFORMATION_MESSAGE, //int messageType
+                            null, //Icon icon,
+                            new String[]{"Play Again", "Exit"}, //Object[] options,
+                            "Exit");//Object initialValue
+                    if (choice == 0) {
+                        reset();
+                    } else System.exit(0);
+                }
             }
-
-
-            guesses.set(tries, input);
-            for (int i = 0; i < 5; i++) {
-                if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
-                    colors.get(tries).set(i, green);
-                } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
-                    colors.get(tries).set(i, yellow);
-                } else colors.get(tries).set(i, black);
-            }
-
-            tries++;
-            updateGrid();
-            if (input.equals(randomWord.toUpperCase())) {
-                int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
-                        "Congrats! You guessed the word in " + tries + " tries!", //Object message,
-                        "You Won", //String title
-                        JOptionPane.YES_NO_OPTION, //int optionType
-                        JOptionPane.INFORMATION_MESSAGE, //int messageType
-                        null, //Icon icon,
-                        new String[]{"Play Again", "Exit"}, //Object[] options,
-                        "Exit");//Object initialValue
-                if (choice == 0) {
-                    reset();
-                } else System.exit(0);
-            }
-
             if (tries == 6) {
                 int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
                         "Sorry! You didn't guess the word correctly.", //Object message,
@@ -116,12 +113,9 @@ public class WordFinder extends JFrame {
     private void createMenus() {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
-
         JMenu menu = new JMenu("File");
-        JMenuItem open = new JMenuItem("Open");
         JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener((e) -> System.exit(0));
-        menu.add(open);
         menu.add(exit);
         menuBar.add(menu);
     }
@@ -172,7 +166,7 @@ public class WordFinder extends JFrame {
                 area.setAlignmentX(Component.CENTER_ALIGNMENT);
                 area.setBorder(blackBorder);
                 a.add(area);
-                c.add(black);
+                c.add(grey);
             }
             wordsTextArea.add(a);
             colors.add(c);
@@ -185,6 +179,7 @@ public class WordFinder extends JFrame {
                 wordsTextArea.get(i).get(j).setText(String.valueOf(guesses.get(i).charAt(j)));
                 wordsTextArea.get(i).get(j).setFont(font);
                 wordsTextArea.get(i).get(j).setBackground(colors.get(i).get(j));
+
             }
         }
     }
