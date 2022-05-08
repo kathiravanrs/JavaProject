@@ -10,9 +10,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
-    static String to;
-    static String subject;
-    static String msg;
 
     static String from = "kathiravanrs@gmail.com";
     static String username = "javaprojectspring2022@gmail.com";
