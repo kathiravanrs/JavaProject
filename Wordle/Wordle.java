@@ -97,9 +97,8 @@ public class Wordle extends JFrame {
                 null,
                 new String[]{"Play Again", "Email My Score"},
                 "Play Again");
-        if (choice == 1) {
-            sendEmail();
-        } else reset();
+        if (choice == 1) sendEmail();
+        else reset();
 
     }
 
@@ -112,9 +111,8 @@ public class Wordle extends JFrame {
                 null,
                 new String[]{"Play Again", "Exit"},
                 "Exit");
-        if (choice == 0) {
-            reset();
-        } else System.exit(0);
+        if (choice == 0) reset();
+        else System.exit(0);
     }
 
     public void sendEmail() {
