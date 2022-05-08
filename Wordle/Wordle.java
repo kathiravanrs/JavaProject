@@ -9,7 +9,8 @@ import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
 
 public class Wordle extends JFrame {
-
+    private long startTime = 0;
+    private int time = 0;
     private int tries = 0;
     private final ReadWordFile commonWords;
     private final ReadWordFile allWords;
@@ -87,17 +88,18 @@ public class Wordle extends JFrame {
     }
 
     public void gameWon() {
+        updateScore();
         int choice = JOptionPane.showOptionDialog(null,
-                "Congrats! You guessed the word in " + tries + " tries!",
+                "Congrats! You guessed the word in " + tries + " tries!\nAnd you took " + time + " seconds!",
                 "You Won",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
                 new String[]{"Play Again", "Email My Score"},
                 "Play Again");
-        if (choice == 0) {
-            reset();
-        } else sendEmail();
+        if (choice == 1) {
+            sendEmail();
+        } else reset();
 
     }
 
@@ -115,9 +117,9 @@ public class Wordle extends JFrame {
         } else System.exit(0);
     }
 
-    public void sendEmail(){
+    public void sendEmail() {
         String recipient = JOptionPane.showInputDialog("Enter Recipient Email Address");
-        Email.send(recipient, "Wordle Score", "Your score is 500");
+        Email.send(recipient, "Wordle Score", "Congrats! You guessed the word \"" + randomWord + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!");
     }
 
     public void createMenus() {
@@ -207,6 +209,7 @@ public class Wordle extends JFrame {
         }
         this.add(wordsPanel);
         this.repaint();
+        startTime = System.currentTimeMillis();
     }
 
     public void reset() {
@@ -215,6 +218,9 @@ public class Wordle extends JFrame {
         wordFinder.setVisible(true);
     }
 
+    public void updateScore() {
+        time = (int) ((System.currentTimeMillis() - startTime) / 1000);
+    }
 
     public static void main(String[] args) {
         Wordle wordFinder = new Wordle();
