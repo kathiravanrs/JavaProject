@@ -97,7 +97,7 @@ public class Wordle extends JFrame {
                 "Play Again");
         if (choice == 0) {
             reset();
-        } else System.exit(0);
+        } else sendEmail();
 
     }
 
@@ -116,7 +116,8 @@ public class Wordle extends JFrame {
     }
 
     public void sendEmail(){
-
+        String recipient = JOptionPane.showInputDialog("Enter Recipient Email Address");
+        Email.send(recipient, "Wordle Score", "Your score is 500");
     }
 
     public void createMenus() {

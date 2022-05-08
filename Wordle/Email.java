@@ -18,13 +18,8 @@ public class Email {
     static String username = "javaprojectspring2022@gmail.com";
     static String password = "javajavajava";
 
-    public Email(String to, String subject, String message) {
-        Email.to = to;
-        Email.subject = subject;
-        msg = message;
-    }
 
-    public static void send() {
+    public static void send(String to, String subject, String msg) {
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
