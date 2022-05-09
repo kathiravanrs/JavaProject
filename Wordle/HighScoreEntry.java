@@ -1,5 +1,3 @@
-import java.util.Comparator;
-import java.util.Locale;
 
 public class HighScoreEntry {
     private final String name;
