@@ -7,27 +7,31 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class HighScoreWindow extends JFrame {
-    private final JTextField key;
     private ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
     JPanel scoreArea = new JPanel();
 
     JScrollPane scrollPane = new JScrollPane(scoreArea);
 
+    Font font = new Font("Segoe Script", Font.ITALIC, 20);
+    Font fontHeading = new Font("Segoe Script", Font.BOLD, 20);
+
+
+
     public HighScoreWindow() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.setSize(400, 600);
+        this.setSize(600, 400);
         JPanel topPanel = new JPanel();
         topPanel.setSize(500, 180);
         createMenus();
-        JLabel textLabel = new JLabel("Enter your guess: ");
-        key = new JTextField(10);
-        key.addActionListener(e -> key.setText(""));
-        JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(e -> key.setText(""));
 
-        topPanel.add(textLabel);
-        topPanel.add(key);
-        topPanel.add(clearButton);
+        JButton sortByName = new JButton("Name");
+        JButton sortByTries = new JButton("Tries");
+        JButton sortBySeconds = new JButton("Seconds");
+
+        topPanel.add(sortByName);
+        topPanel.add(sortByTries);
+        topPanel.add(sortBySeconds);
+
         scoreArea.setLayout(new BoxLayout(scoreArea, BoxLayout.Y_AXIS));
         this.add(topPanel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
@@ -69,15 +73,62 @@ public class HighScoreWindow extends JFrame {
     }
 
     public void displayScores() {
-        JPanel item = new JPanel();
-        item.setLayout(new BoxLayout(item, BoxLayout.Y_AXIS));
-
+        scoreArea.add(getListHeading());
         for (HighScoreEntry entry : highScoreEntries) {
-            JTextArea area = new JTextArea();
-            area.append(entry.toString() + "\n");
-            item.add(area);
-            scoreArea.add(item);
+            scoreArea.add(getListItem(entry));
         }
+    }
+
+    public JPanel getListItem(HighScoreEntry entry) {
+        JPanel item = new JPanel();
+
+        JTextArea name = new JTextArea(1, 12);
+        name.append(entry.getName());
+        name.setFont(font);
+        item.add(name);
+
+        JTextArea word = new JTextArea(1, 5);
+        word.append(entry.getWord());
+        word.setFont(font);
+        item.add(word);
+
+        JTextArea tries = new JTextArea(1, 4);
+        tries.append( String.valueOf(entry.getTries()));
+        tries.setFont(font);
+        item.add(tries);
+
+        JTextArea seconds = new JTextArea(1, 4);
+        seconds.append(String.valueOf(entry.getSecond()));
+        seconds.setFont(font);
+        item.add(seconds);
+
+        return item;
+    }
+
+    public JPanel getListHeading(){
+        JPanel item = new JPanel();
+
+        JTextArea name = new JTextArea(1, 12);
+        name.append("Name");
+        name.setFont(fontHeading);
+        item.add(name);
+
+        JTextArea word = new JTextArea(1, 5);
+        word.append("Word");
+        word.setFont(fontHeading);
+        item.add(word);
+
+        JTextArea tries = new JTextArea(1, 4);
+        tries.append( "Tries");
+        tries.setFont(fontHeading);
+        item.add(tries);
+
+        JTextArea seconds = new JTextArea(1, 4);
+        seconds.append("Seconds");
+        seconds.setFont(fontHeading);
+        item.add(seconds);
+
+        return item;
     }
 
 
