@@ -58,11 +58,9 @@ public class Wordle extends JFrame {
         createGrid();
         displayGrid();
         this.add(topPanel, BorderLayout.NORTH);
-
-        testdb();
     }
 
-    public void testdb() {
+    public void addHighScoreList() {
         Database db = new Database();
         try {
             JSONObject obj = db.read();
@@ -151,8 +149,6 @@ public class Wordle extends JFrame {
             db.post(name, tries, time, randomWord.toUpperCase());
             Email.send(email, "Wordle Score",
                     "Congrats! You guessed the word \"" + randomWord.toUpperCase() + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!");
-
-            db.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -164,9 +160,18 @@ public class Wordle extends JFrame {
         this.setJMenuBar(menuBar);
         JMenu menu = new JMenu("File");
         JMenuItem exit = new JMenuItem("Exit");
+        JMenuItem restart = new JMenuItem("Restart");
+        restart.addActionListener(e -> reset());
         exit.addActionListener((e) -> System.exit(0));
+        menu.add(restart);
         menu.add(exit);
         menuBar.add(menu);
+
+        JMenu highScores = new JMenu("HighScores");
+        JMenuItem view = new JMenuItem("View High Scores");
+        view.addActionListener(e -> addHighScoreList());
+        highScores.add(view);
+        menuBar.add(highScores);
     }
 
     public void pickRandomWord() {

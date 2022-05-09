@@ -9,12 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="Latest">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wordle/HighScoreEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/Database.java" afterDir="false" />
+    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="HighScore List added">
       <change beforePath="$PROJECT_DIR$/Wordle/Wordle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/Wordle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +92,7 @@
       <workItem from="1651791711920" duration="6033000" />
       <workItem from="1651847412867" duration="2245000" />
       <workItem from="1651964836981" duration="14785000" />
-      <workItem from="1652042733442" duration="7386000" />
+      <workItem from="1652042733442" duration="7798000" />
     </task>
     <task id="LOCAL-00001" summary="May 5">
       <created>1651770261698</created>
@@ -183,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652049061165</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="HighScore List added">
+      <created>1652055512888</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652055512888</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +206,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="May 5" />
     <MESSAGE value="Latest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Latest" />
+    <MESSAGE value="HighScore List added" />
+    <option name="LAST_COMMIT_MESSAGE" value="HighScore List added" />
   </component>
 </project>
