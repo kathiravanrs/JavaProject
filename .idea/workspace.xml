@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="HighScore Menu added">
+    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="HighScore Window added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle/HighScoreWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/HighScoreWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle/Wordle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/Wordle.java" afterDir="false" />
     </list>
@@ -105,7 +104,7 @@
       <workItem from="1652056796040" duration="197000" />
       <workItem from="1652057024907" duration="1327000" />
       <workItem from="1652059881497" duration="490000" />
-      <workItem from="1652103233887" duration="3425000" />
+      <workItem from="1652103233887" duration="7429000" />
     </task>
     <task id="LOCAL-00001" summary="May 5">
       <created>1651770261698</created>
@@ -212,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652060239835</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="HighScore Window added">
+      <created>1652108329305</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652108329305</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +241,7 @@
     <MESSAGE value="Latest" />
     <MESSAGE value="HighScore List added" />
     <MESSAGE value="HighScore Menu added" />
-    <option name="LAST_COMMIT_MESSAGE" value="HighScore Menu added" />
+    <MESSAGE value="HighScore Window added" />
+    <option name="LAST_COMMIT_MESSAGE" value="HighScore Window added" />
   </component>
 </project>

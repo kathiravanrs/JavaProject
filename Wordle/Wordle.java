@@ -217,6 +217,7 @@ public class Wordle extends JFrame {
         updateGrid();
 
         Panel wordsPanel = new Panel();
+        wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
         for (ArrayList<JTextArea> a : wordsTextArea) {
             Panel lettersPanel = new Panel();
             for (JTextArea j : a) {

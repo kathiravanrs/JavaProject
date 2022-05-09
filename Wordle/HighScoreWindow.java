@@ -9,6 +9,9 @@ import java.util.Set;
 public class HighScoreWindow extends JFrame {
     private final JTextField key;
     private ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
+    JPanel scoreArea = new JPanel();
+
+    JScrollPane scrollPane = new JScrollPane(scoreArea);
 
     public HighScoreWindow() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -25,9 +28,11 @@ public class HighScoreWindow extends JFrame {
         topPanel.add(textLabel);
         topPanel.add(key);
         topPanel.add(clearButton);
+        scoreArea.setLayout(new BoxLayout(scoreArea, BoxLayout.Y_AXIS));
         this.add(topPanel, BorderLayout.NORTH);
-
+        this.add(scrollPane, BorderLayout.CENTER);
         getScores();
+        displayScores();
     }
 
     public void createMenus() {
@@ -62,5 +67,18 @@ public class HighScoreWindow extends JFrame {
             e.printStackTrace();
         }
     }
+
+    public void displayScores() {
+        JPanel item = new JPanel();
+        item.setLayout(new BoxLayout(item, BoxLayout.Y_AXIS));
+
+        for (HighScoreEntry entry : highScoreEntries) {
+            JTextArea area = new JTextArea();
+            area.append(entry.toString() + "\n");
+            item.add(area);
+            scoreArea.add(item);
+        }
+    }
+
 
 }
