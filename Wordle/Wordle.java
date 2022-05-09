@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +9,7 @@ import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Wordle extends JFrame {
     private long startTime = 0;
@@ -29,6 +32,7 @@ public class Wordle extends JFrame {
     String randomWord = "raise";
     ArrayList<ArrayList<JTextArea>> wordsTextArea = new ArrayList<>();
     ArrayList<ArrayList<Color>> colors = new ArrayList<>();
+    ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
 
 
     public Wordle() {
@@ -54,6 +58,29 @@ public class Wordle extends JFrame {
         createGrid();
         displayGrid();
         this.add(topPanel, BorderLayout.NORTH);
+
+        testdb();
+    }
+
+    public void testdb() {
+        Database db = new Database();
+        try {
+            JSONObject obj = db.read();
+            Set set = obj.keySet();
+            for (Object key : set) {
+                JSONObject json = (JSONObject) obj.get(key);
+                String name = (String) key;
+                String word = (String) json.get("Word");
+                long tries = (long) json.get("Tries");
+                long seconds = (long) json.get("Seconds");
+                System.out.println(word + " " + tries + " " + seconds);
+                HighScoreEntry entry = new HighScoreEntry(name, tries, seconds, word);
+                highScoreEntries.add(entry);
+                System.out.println(highScoreEntries);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     class AddWords implements ActionListener {
@@ -88,16 +115,16 @@ public class Wordle extends JFrame {
     }
 
     public void gameWon() {
-        updateScore();
+        updateTime();
         int choice = JOptionPane.showOptionDialog(null,
                 "Congrats! You guessed the word in " + tries + " tries!\nAnd you took " + time + " seconds!",
                 "You Won",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
-                new String[]{"Play Again", "Email My Score"},
+                new String[]{"Play Again", "Submit My Score"},
                 "Play Again");
-        if (choice == 1) sendEmail();
+        if (choice == 1) submitScore();
         else reset();
 
     }
@@ -115,9 +142,21 @@ public class Wordle extends JFrame {
         else System.exit(0);
     }
 
-    public void sendEmail() {
-        String recipient = JOptionPane.showInputDialog("Enter Recipient Email Address");
-        Email.send(recipient, "Wordle Score", "Congrats! You guessed the word \"" + randomWord + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!");
+    public void submitScore() {
+        String email = JOptionPane.showInputDialog("Enter Your Email Address");
+        String name = JOptionPane.showInputDialog("Enter Your Name");
+
+        Database db = new Database();
+        try {
+            db.post(name, tries, time, randomWord.toUpperCase());
+            Email.send(email, "Wordle Score",
+                    "Congrats! You guessed the word \"" + randomWord.toUpperCase() + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!");
+
+            db.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void createMenus() {
@@ -216,7 +255,7 @@ public class Wordle extends JFrame {
         wordFinder.setVisible(true);
     }
 
-    public void updateScore() {
+    public void updateTime() {
         time = (int) ((System.currentTimeMillis() - startTime) / 1000);
     }
 
