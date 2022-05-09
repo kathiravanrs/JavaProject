@@ -43,14 +43,9 @@ public class Database {
             String strCurrentLine;
             while ((strCurrentLine = br.readLine()) != null) {
                 out.append(strCurrentLine);
-                System.out.println(strCurrentLine);
             }
         } else {
-            br = new BufferedReader(new InputStreamReader(http.getErrorStream()));
-            String strCurrentLine;
-            while ((strCurrentLine = br.readLine()) != null) {
-                System.out.println(strCurrentLine);
-            }
+            System.out.println("Error while parsing JSON");
         }
         JSONParser parser = new JSONParser();
         try {

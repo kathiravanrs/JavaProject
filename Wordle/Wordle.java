@@ -1,4 +1,3 @@
-import org.json.simple.JSONObject;
 
 import java.awt.*;
 import java.io.FileInputStream;
@@ -7,7 +6,6 @@ import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Wordle extends JFrame {
     private long startTime = 0;
@@ -30,8 +28,6 @@ public class Wordle extends JFrame {
     String randomWord = "raise";
     ArrayList<ArrayList<JTextArea>> wordsTextArea = new ArrayList<>();
     ArrayList<ArrayList<Color>> colors = new ArrayList<>();
-    ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
-
 
     public Wordle() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -59,27 +55,12 @@ public class Wordle extends JFrame {
     }
 
     public void addHighScoreList() {
-        Database db = new Database();
-        try {
-            JSONObject obj = db.read();
-            Set set = obj.keySet();
-            for (Object key : set) {
-                JSONObject json = (JSONObject) obj.get(key);
-                String name = (String) key;
-                String word = (String) json.get("Word");
-                long tries = (long) json.get("Tries");
-                long seconds = (long) json.get("Seconds");
-                System.out.println(word + " " + tries + " " + seconds);
-                HighScoreEntry entry = new HighScoreEntry(name, tries, seconds, word);
-                highScoreEntries.add(entry);
-                System.out.println(highScoreEntries);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HighScoreWindow highScoreWindow = new HighScoreWindow();
+        highScoreWindow.setVisible(true);
+
     }
 
-    public  void addWords(){
+    public void addWords() {
         String input = key.getText().strip().toUpperCase();
         if (input.length() != 5) {
             JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
@@ -105,36 +86,6 @@ public class Wordle extends JFrame {
         }
         if (tries == 6) gameLost();
     }
-//    class AddWords implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            String input = key.getText().strip().toUpperCase();
-//            if (input.length() != 5) {
-//                JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
-//                return;
-//            } else if (!allWordsList.contains(input.toLowerCase())) {
-//                JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
-//                key.setText("");
-//                return;
-//            } else {
-//                guesses.set(tries, input);
-//                for (int i = 0; i < 5; i++) {
-//                    if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
-//                        colors.get(tries).set(i, green);
-//                    } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
-//                        colors.get(tries).set(i, yellow);
-//                    } else colors.get(tries).set(i, black);
-//                }
-//
-//                tries++;
-//                updateGrid();
-//                key.setText("");
-//                if (input.equals(randomWord.toUpperCase())) gameWon();
-//            }
-//            if (tries == 6) gameLost();
-//        }
-//    }
 
     public void gameWon() {
         updateTime();
@@ -153,7 +104,7 @@ public class Wordle extends JFrame {
 
     public void gameLost() {
         int choice = JOptionPane.showOptionDialog(null,
-                "Sorry! You didn't guess the word correctly.",
+                "Sorry! You didn't guess the word correctly.\n The word was " + randomWord.toUpperCase(),
                 "You Lost",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
