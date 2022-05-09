@@ -3,9 +3,10 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Project_jar</output-path>
     <root id="archive" name="Project.jar">
       <element id="module-output" name="Project" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/javax.mail.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/smtp-1.4.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/activation.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/activation.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/smtp-1.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/json-simple-1.1.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

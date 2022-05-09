@@ -1,8 +1,6 @@
 import org.json.simple.JSONObject;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +46,7 @@ public class Wordle extends JFrame {
         System.out.println(randomWord);
         JLabel textLabel = new JLabel("Enter your guess: ");
         key = new JTextField(10);
-        key.addActionListener(new AddWords());
+        key.addActionListener(e -> addWords());
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(e -> key.setText(""));
 
@@ -81,36 +79,62 @@ public class Wordle extends JFrame {
         }
     }
 
-    class AddWords implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String input = key.getText().strip().toUpperCase();
-            if (input.length() != 5) {
-                JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
-                return;
-            } else if (!allWordsList.contains(input.toLowerCase())) {
-                JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
-                key.setText("");
-                return;
-            } else {
-                guesses.set(tries, input);
-                for (int i = 0; i < 5; i++) {
-                    if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
-                        colors.get(tries).set(i, green);
-                    } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
-                        colors.get(tries).set(i, yellow);
-                    } else colors.get(tries).set(i, black);
-                }
-
-                tries++;
-                updateGrid();
-                key.setText("");
-                if (input.equals(randomWord.toUpperCase())) gameWon();
+    public  void addWords(){
+        String input = key.getText().strip().toUpperCase();
+        if (input.length() != 5) {
+            JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
+            return;
+        } else if (!allWordsList.contains(input.toLowerCase())) {
+            JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
+            key.setText("");
+            return;
+        } else {
+            guesses.set(tries, input);
+            for (int i = 0; i < 5; i++) {
+                if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
+                    colors.get(tries).set(i, green);
+                } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
+                    colors.get(tries).set(i, yellow);
+                } else colors.get(tries).set(i, black);
             }
-            if (tries == 6) gameLost();
+
+            tries++;
+            updateGrid();
+            key.setText("");
+            if (input.equals(randomWord.toUpperCase())) gameWon();
         }
+        if (tries == 6) gameLost();
     }
+//    class AddWords implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            String input = key.getText().strip().toUpperCase();
+//            if (input.length() != 5) {
+//                JOptionPane.showMessageDialog(null, "Please Enter a Five Letter Word");
+//                return;
+//            } else if (!allWordsList.contains(input.toLowerCase())) {
+//                JOptionPane.showMessageDialog(null, "Your word is not in my dictionary!");
+//                key.setText("");
+//                return;
+//            } else {
+//                guesses.set(tries, input);
+//                for (int i = 0; i < 5; i++) {
+//                    if (input.charAt(i) == randomWord.toUpperCase().charAt(i)) {
+//                        colors.get(tries).set(i, green);
+//                    } else if (randomWord.toUpperCase().contains(String.valueOf(input.charAt(i)))) {
+//                        colors.get(tries).set(i, yellow);
+//                    } else colors.get(tries).set(i, black);
+//                }
+//
+//                tries++;
+//                updateGrid();
+//                key.setText("");
+//                if (input.equals(randomWord.toUpperCase())) gameWon();
+//            }
+//            if (tries == 6) gameLost();
+//        }
+//    }
 
     public void gameWon() {
         updateTime();

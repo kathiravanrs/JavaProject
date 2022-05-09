@@ -15,17 +15,9 @@ public class ReadWordFile {
         return words.get(r);
     }
 
-    public List<Object> getWords(){
+    public List<Object> getWords() {
         return words;
     }
-
-    /**
-     * Load a file into this word set.
-     * @effects Removes all the wordsTextArea from this word set and replaces
-     * them with the wordsTextArea found in the given file.
-     * @param in File to load
-     * @throws IOException if file cannot be opened
-     */
 
     public void load(InputStream in) throws IOException {
         Collator c = Collator.getInstance();
@@ -43,23 +35,5 @@ public class ReadWordFile {
                 s.add(tok.sval);
         }
         words = new ArrayList(s);
-    }
-
-    /**
-     * @param args Command-line arguments.  Ignored.
-     */
-    public static void main(String[] args) {
-        ReadWordFile words = new ReadWordFile();
-
-
-        URL url = ReadWordFile.class.getResource("wordsTextArea");
-        if (url == null)
-            throw new RuntimeException("Missing resource: wordsTextArea");
-        try {
-            words.load(url.openStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 }

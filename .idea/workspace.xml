@@ -2,14 +2,31 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Project:jar" />
+      <artifact name="Project:jar2" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="HighScore List added">
+    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="HighScore Menu added">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/libs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project.eml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle/HighScoreWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/activation.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/javax.mail.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/json-simple-1.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/smtp-1.4.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Project_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/activation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_mail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/smtp_1_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle/ReadWordFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/ReadWordFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle/Wordle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/Wordle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,12 +62,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/kathi/Desktop/json-simple-1.1.1.jar",
+    "last_opened_file_path": "D:/AllFolders/Academics/Sem2/Java/Assignments/Project/libs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
@@ -71,9 +88,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Project.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Project_jar2/Project.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Wordle" />
+        <item itemvalue="JAR Application.Project.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -92,7 +114,11 @@
       <workItem from="1651791711920" duration="6033000" />
       <workItem from="1651847412867" duration="2245000" />
       <workItem from="1651964836981" duration="14785000" />
-      <workItem from="1652042733442" duration="7798000" />
+      <workItem from="1652042733442" duration="8200000" />
+      <workItem from="1652056185779" duration="599000" />
+      <workItem from="1652056796040" duration="197000" />
+      <workItem from="1652057024907" duration="1327000" />
+      <workItem from="1652059881497" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="May 5">
       <created>1651770261698</created>
@@ -185,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652055512888</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="HighScore Menu added">
+      <created>1652055957887</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652055957887</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +240,7 @@
     <MESSAGE value="May 5" />
     <MESSAGE value="Latest" />
     <MESSAGE value="HighScore List added" />
-    <option name="LAST_COMMIT_MESSAGE" value="HighScore List added" />
+    <MESSAGE value="HighScore Menu added" />
+    <option name="LAST_COMMIT_MESSAGE" value="HighScore Menu added" />
   </component>
 </project>
