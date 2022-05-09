@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 
 public class HighScoreWindow extends JFrame {
-    private ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
+    private final ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
     JPanel scoreArea = new JPanel();
 
     JScrollPane scrollPane = new JScrollPane(scoreArea);
@@ -16,6 +17,11 @@ public class HighScoreWindow extends JFrame {
     Font fontHeading = new Font("Segoe Script", Font.BOLD, 20);
 
 
+    public static Comparator<HighScoreEntry> nameComparator = Comparator.comparing(HighScoreEntry::getName);
+
+    public static Comparator<HighScoreEntry> triesComparator = Comparator.comparingLong(HighScoreEntry::getTries);
+
+    public static Comparator<HighScoreEntry> secondsComparator = Comparator.comparingLong(HighScoreEntry::getSecond);
 
     public HighScoreWindow() {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -23,11 +29,26 @@ public class HighScoreWindow extends JFrame {
         JPanel topPanel = new JPanel();
         topPanel.setSize(500, 180);
         createMenus();
-
+        JTextArea text = new JTextArea();
+        text.append("Sort by:");
+        text.setEditable(false);
         JButton sortByName = new JButton("Name");
         JButton sortByTries = new JButton("Tries");
         JButton sortBySeconds = new JButton("Seconds");
 
+        sortByName.addActionListener(e -> {
+            highScoreEntries.sort(nameComparator);
+            displayScores();
+        });
+        sortByTries.addActionListener(e -> {
+            highScoreEntries.sort(triesComparator);
+            displayScores();
+        });
+        sortBySeconds.addActionListener(e -> {
+            highScoreEntries.sort(secondsComparator);
+            displayScores();
+        });
+        topPanel.add(text);
         topPanel.add(sortByName);
         topPanel.add(sortByTries);
         topPanel.add(sortBySeconds);
@@ -73,10 +94,14 @@ public class HighScoreWindow extends JFrame {
     }
 
     public void displayScores() {
+        scoreArea.removeAll();
         scoreArea.add(getListHeading());
         for (HighScoreEntry entry : highScoreEntries) {
             scoreArea.add(getListItem(entry));
         }
+        this.repaint();
+        this.setVisible(false);
+        this.setVisible(true);
     }
 
     public JPanel getListItem(HighScoreEntry entry) {
@@ -93,7 +118,7 @@ public class HighScoreWindow extends JFrame {
         item.add(word);
 
         JTextArea tries = new JTextArea(1, 4);
-        tries.append( String.valueOf(entry.getTries()));
+        tries.append(String.valueOf(entry.getTries()));
         tries.setFont(font);
         item.add(tries);
 
@@ -105,7 +130,7 @@ public class HighScoreWindow extends JFrame {
         return item;
     }
 
-    public JPanel getListHeading(){
+    public JPanel getListHeading() {
         JPanel item = new JPanel();
 
         JTextArea name = new JTextArea(1, 12);
@@ -119,7 +144,7 @@ public class HighScoreWindow extends JFrame {
         item.add(word);
 
         JTextArea tries = new JTextArea(1, 4);
-        tries.append( "Tries");
+        tries.append("Tries");
         tries.setFont(fontHeading);
         item.add(tries);
 

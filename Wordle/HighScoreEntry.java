@@ -1,8 +1,11 @@
+import java.util.Comparator;
+import java.util.Locale;
+
 public class HighScoreEntry {
-    private String name;
-    private long tries;
-    private long second;
-    private String word;
+    private final String name;
+    private final long tries;
+    private final long second;
+    private final String word;
 
     public HighScoreEntry(String name, long tries, long second, String word) {
         this.name = name;
@@ -13,11 +16,11 @@ public class HighScoreEntry {
 
 
     public String getName() {
-        return name;
+        return name.toUpperCase();
     }
 
     public String getWord() {
-        return word;
+        return word.toUpperCase();
     }
 
     public long getTries() {
@@ -30,9 +33,9 @@ public class HighScoreEntry {
 
     @Override
     public String toString() {
-        return name + " "+
-                word + " "+
-                tries + " "+
+        return name + " " +
+                word + " " +
+                tries + " " +
                 second;
     }
 }

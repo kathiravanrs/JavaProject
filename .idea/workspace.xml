@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="Items arranged vertically">
+    <list default="true" id="20696e37-09f9-4274-a80c-acebdd19921c" name="Changes" comment="All features working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle/HighScoreEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/HighScoreEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle/HighScoreWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle/HighScoreWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +104,7 @@
       <workItem from="1652056796040" duration="197000" />
       <workItem from="1652057024907" duration="1327000" />
       <workItem from="1652059881497" duration="490000" />
-      <workItem from="1652103233887" duration="10185000" />
+      <workItem from="1652103233887" duration="13233000" />
     </task>
     <task id="LOCAL-00001" summary="May 5">
       <created>1651770261698</created>
@@ -224,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652112427674</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="HighScore Items displayed Properly">
+      <created>1652115672718</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652115672718</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +257,8 @@
     <MESSAGE value="HighScore Menu added" />
     <MESSAGE value="HighScore Window added" />
     <MESSAGE value="Items arranged vertically" />
-    <option name="LAST_COMMIT_MESSAGE" value="Items arranged vertically" />
+    <MESSAGE value="HighScore Items displayed Properly" />
+    <MESSAGE value="All features working" />
+    <option name="LAST_COMMIT_MESSAGE" value="All features working" />
   </component>
 </project>
