@@ -36,4 +36,5 @@ public class ReadWordFile {
         }
         words = new ArrayList(s);
     }
+
 }

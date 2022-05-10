@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class Wordle extends JFrame {
     ArrayList<ArrayList<Color>> colors = new ArrayList<>();
 
     public Wordle() {
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 600);
         commonWords = new ReadWordFile();
         allWords = new ReadWordFile();
@@ -152,14 +151,19 @@ public class Wordle extends JFrame {
     public void pickRandomWord() {
 
         try {
-            InputStream in = new FileInputStream("common_words");
+            InputStream in = getClass().getResourceAsStream("/common_words");
+
             commonWords.load(in);
             fileOpened = true;
         } catch (IOException error) {
             error.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Common File Exception");
+
         }
         if (!fileOpened) {
             System.out.println("File Not Chosen!");
+            JOptionPane.showMessageDialog(null,"Common Word File Not Opened");
+
             return;
         }
         randomWord = (String) commonWords.getRandomWord();
@@ -167,14 +171,17 @@ public class Wordle extends JFrame {
 
     public void loadWords() {
         try {
-            InputStream in = new FileInputStream("words");
+            InputStream in = getClass().getResourceAsStream("/words");
             allWords.load(in);
             fileOpened = true;
         } catch (IOException error) {
+            JOptionPane.showMessageDialog(null,"Word File Exception");
             error.printStackTrace();
         }
         if (!fileOpened) {
             System.out.println("File Not Chosen!");
+            JOptionPane.showMessageDialog(null,"Word File Not Opened");
+
             return;
         }
         allWordsList = (ArrayList<Object>) allWords.getWords();
