@@ -42,13 +42,16 @@ public class Wordle extends JFrame {
 
         JPanel topPanel = new JPanel();
         topPanel.setSize(500, 180);
+
+
+        commonWords = new ReadWordFile(); //List of common 5 letter words
+        allWords = new ReadWordFile(); //List of all 5 letter words
+
         createMenus();
         pickRandomWord();
         loadWords();
         System.out.println(randomWord);
 
-        commonWords = new ReadWordFile(); //List of common 5 letter words
-        allWords = new ReadWordFile(); //List of all 5 letter words
 
         JLabel textLabel = new JLabel("Enter your guess: ");
         key = new JTextField(10);
