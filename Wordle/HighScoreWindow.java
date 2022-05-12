@@ -8,19 +8,21 @@ import java.util.Comparator;
 import java.util.Set;
 
 public class HighScoreWindow extends JFrame {
+    // List of all leaderboard entries
     private final ArrayList<HighScoreEntry> highScoreEntries = new ArrayList<>();
     JPanel scoreArea = new JPanel();
-
     JScrollPane scrollPane = new JScrollPane(scoreArea);
 
     Font font = new Font("Segoe Script", Font.ITALIC, 20);
     Font fontHeading = new Font("Segoe Script", Font.BOLD, 20);
 
-
+    // Custom comparator to sort by name
     public static Comparator<HighScoreEntry> nameComparator = Comparator.comparing(HighScoreEntry::getName);
 
+    // Custom comparator to sort by Tries
     public static Comparator<HighScoreEntry> triesComparator = Comparator.comparingLong(HighScoreEntry::getTries);
 
+    // Custom comparator to sort by seconds
     public static Comparator<HighScoreEntry> secondsComparator = Comparator.comparingLong(HighScoreEntry::getSecond);
 
     public HighScoreWindow() {
@@ -32,6 +34,8 @@ public class HighScoreWindow extends JFrame {
         JTextArea text = new JTextArea();
         text.append("Sort by:");
         text.setEditable(false);
+
+
         JButton sortByName = new JButton("Name");
         JButton sortByTries = new JButton("Tries");
         JButton sortBySeconds = new JButton("Seconds");
@@ -60,6 +64,8 @@ public class HighScoreWindow extends JFrame {
         displayScores();
     }
 
+
+    // Create the menu bar
     public void createMenus() {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
@@ -71,6 +77,7 @@ public class HighScoreWindow extends JFrame {
 
     }
 
+    // Retrieve the high scores from the cloud Database and display it
     public void getScores() {
 
         Database db = new Database();
@@ -93,6 +100,8 @@ public class HighScoreWindow extends JFrame {
         }
     }
 
+
+    // Iterate through the high score entries and add it to the high score window
     public void displayScores() {
         scoreArea.removeAll();
         scoreArea.add(getListHeading());
@@ -104,6 +113,8 @@ public class HighScoreWindow extends JFrame {
         this.setVisible(true);
     }
 
+
+    // Generates a single panel for each user with name, tries and seconds
     public JPanel getListItem(HighScoreEntry entry) {
         JPanel item = new JPanel();
 
@@ -130,6 +141,8 @@ public class HighScoreWindow extends JFrame {
         return item;
     }
 
+
+    // Generates the column headings
     public JPanel getListHeading() {
         JPanel item = new JPanel();
 

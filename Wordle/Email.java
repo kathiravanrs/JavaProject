@@ -11,14 +11,20 @@ import javax.mail.internet.MimeMessage;
 
 public class Email {
 
-    static String from = "kathiravanrs@gmail.com";
+    // SMTP Credentials for a throwaway GMAIL account created for this project
+
+    static String from = "javaprojectspring2022@gmail.com";
     static String username = "javaprojectspring2022@gmail.com";
     static String password = "javajavajava";
 
 
     public static void send(String to, String subject, String msg) {
+
+        // host of the SMTP server
         String host = "smtp.gmail.com";
 
+
+        // Other configurations as needed
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -33,15 +39,20 @@ public class Email {
                 });
 
         try {
+            // Create a new message and set the parameters
+
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
 
+            // Set the email subject
             message.setSubject(subject);
-
+            // Set the message text
             message.setText(msg);
 
+
+            // Send the email message
             Transport.send(message);
             System.out.println("Sent message successfully....");
 
