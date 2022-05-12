@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.*;
@@ -17,6 +16,9 @@ public class Wordle extends JFrame {
     private final ArrayList<String> guesses = new ArrayList<>();
     private final CompoundBorder blackBorder = new CompoundBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15),
             BorderFactory.createMatteBorder(2, 2, 2, 2, Color.black));
+
+    private String email = "";
+    private String name = "";
 
     Font font = new Font("Segoe Script", Font.BOLD, 20);
     Color green = new Color(0, 255, 0);
@@ -114,19 +116,32 @@ public class Wordle extends JFrame {
         else System.exit(0);
     }
 
-    public void submitScore() {
-        String email = JOptionPane.showInputDialog("Enter Your Email Address");
-        String name = JOptionPane.showInputDialog("Enter Your Name");
 
+    public void sendEmail() {
+        Thread t1 = new Thread(() -> Email.send(email, "Wordle Score",
+                "Congrats! You guessed the word \"" + randomWord.toUpperCase() + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!"));
+        t1.start();
+    }
+
+    public void databasePost() {
         Database db = new Database();
-        try {
-            db.post(name, tries, time, randomWord.toUpperCase());
-            Email.send(email, "Wordle Score",
-                    "Congrats! You guessed the word \"" + randomWord.toUpperCase() + "\" in " + tries + " tries!\nAnd you took " + time + " seconds!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+        Thread t1 = new Thread(() -> {
+            try {
+                db.post(name, tries, time, randomWord.toUpperCase());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t1.start();
+
+    }
+
+    public void submitScore() {
+        email = JOptionPane.showInputDialog("Enter Your Email Address");
+        name = JOptionPane.showInputDialog("Enter Your Name");
+        sendEmail();
+        databasePost();
     }
 
     public void createMenus() {
@@ -157,12 +172,12 @@ public class Wordle extends JFrame {
             fileOpened = true;
         } catch (IOException error) {
             error.printStackTrace();
-            JOptionPane.showMessageDialog(null,"Common File Exception");
+            JOptionPane.showMessageDialog(null, "Common File Exception");
 
         }
         if (!fileOpened) {
             System.out.println("File Not Chosen!");
-            JOptionPane.showMessageDialog(null,"Common Word File Not Opened");
+            JOptionPane.showMessageDialog(null, "Common Word File Not Opened");
 
             return;
         }
@@ -175,12 +190,12 @@ public class Wordle extends JFrame {
             allWords.load(in);
             fileOpened = true;
         } catch (IOException error) {
-            JOptionPane.showMessageDialog(null,"Word File Exception");
+            JOptionPane.showMessageDialog(null, "Word File Exception");
             error.printStackTrace();
         }
         if (!fileOpened) {
             System.out.println("File Not Chosen!");
-            JOptionPane.showMessageDialog(null,"Word File Not Opened");
+            JOptionPane.showMessageDialog(null, "Word File Not Opened");
 
             return;
         }
