@@ -3,6 +3,10 @@ import java.net.URL;
 import java.text.Collator;
 import java.util.*;
 
+
+
+// This method directly used from one of the assignments
+
 public class ReadWordFile {
     private List words;
 
@@ -10,6 +14,8 @@ public class ReadWordFile {
 
     }
 
+
+    // Returns a random word from the list
     public Object getRandomWord() {
         int r = (int) (Math.random() * words.size());
         return words.get(r);
@@ -19,6 +25,7 @@ public class ReadWordFile {
         return words;
     }
 
+    // Loads the file
     public void load(InputStream in) throws IOException {
         Collator c = Collator.getInstance();
         c.setStrength(Collator.PRIMARY);
